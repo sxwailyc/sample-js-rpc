@@ -3,6 +3,16 @@
 
 ## Server ##
 
+    
+1. config
+
+      let spring scan the js-rpc core class 
+
+    `<context:component-scan base-package="com.dt.sample.js.rpc.controller"></context:component-scan>`
+
+
+2. java codeing
+
     @Service
     @Lazy(false)
     public class DemoWebServiceImpl implements DemoWebService {
