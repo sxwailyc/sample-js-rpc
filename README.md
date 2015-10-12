@@ -36,6 +36,18 @@
 
 ## Client ##
 
+1. import rpc.js
+
+    `<script src="/js/rpc.js"></script>`
+
+2. register rpc interface
+
+    `var service = new rpc.ServiceProxy("/services/demo", {asynchronous:false, methods: ['say', 'getTime', 'addition']});`
+
+3. call the remote method by javascript
+
+eg.
+
      service.say('han mei mei') -> hello han mei mei
 
      service.getTime() -> 1444614301489
