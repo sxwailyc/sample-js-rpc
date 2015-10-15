@@ -6,6 +6,15 @@
     
 1. config
 
+  maven
+
+    <dependency>
+        <groupId>org.naike</groupId>
+        <artifactId>sample-js-rpc</artifactId>
+        <version>1.0</version>
+    </dependency>
+
+
       let spring scan the js-rpc core class 
 
     `<context:component-scan base-package="com.dt.sample.js.rpc.controller"></context:component-scan>`
