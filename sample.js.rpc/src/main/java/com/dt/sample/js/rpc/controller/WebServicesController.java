@@ -90,6 +90,23 @@ public class WebServicesController {
 		return newParams;
 	}
 
+	private Object getService(ApplicationContext context, String serviceName) {
+		try {
+			if (context.containsBean(serviceName + "WebServiceImpl")) {
+				return context.getBean(serviceName + "WebServiceImpl");
+			}
+
+			if (context.containsBean(serviceName + "WebService")) {
+				return context.getBean(serviceName + "WebService");
+			}
+
+		} catch (Exception e) {
+			logger.info("service[" + serviceName + "]不存在");
+		}
+
+		return null;
+	}
+
 	@ResponseBody
 	@RequestMapping(value = "{serviceName}")
 	public Map<String, Object> call(HttpServletRequest request, @RequestBody RpcRequest rpcRequest, @PathVariable String serviceName) {
@@ -101,7 +118,7 @@ public class WebServicesController {
 
 		logger.info("serviceName[" + serviceName + "], method[" + rpcRequest.getMethod() + "].params[" + rpcRequest.getParams() + "]");
 
-		Object service = context.getBean(serviceName + "WebServiceImpl");
+		Object service = this.getService(context, serviceName);
 
 		if (service != null) {
 
@@ -111,6 +128,7 @@ public class WebServicesController {
 
 			m = getMethod(service, rpcRequest.getMethod());
 
+			
 			if (m != null) {
 				try {
 
