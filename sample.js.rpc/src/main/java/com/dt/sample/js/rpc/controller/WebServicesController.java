@@ -77,7 +77,11 @@ public class WebServicesController {
 			} else if (cls == Double.class || cls == double.class) {
 				o = Double.parseDouble(params[i].toString());
 			} else if (cls == Date.class) {
-				o = DateUtil.str2Date(params[i].toString());
+				try {
+					o = DateUtil.str2Date(params[i].toString());
+				} catch (Exception e) {
+					o = params[i];
+				}
 			} else {
 				try {
 					o = Json.toObject(Json.toJson(params[i]), cls);
@@ -128,7 +132,6 @@ public class WebServicesController {
 
 			m = getMethod(service, rpcRequest.getMethod());
 
-			
 			if (m != null) {
 				try {
 
